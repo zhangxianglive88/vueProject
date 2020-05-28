@@ -12,6 +12,9 @@ Vue.use(vueResource)
 
 // 设置请求的根路径
 Vue.http.options.root = 'http://zhangxiang.com:8888'
+// 全局设置post时候表单数据格式组织形式   application/x-www-form-urlencoded
+Vue.http.options.emulateJSON = true
+
 
 // 导入APP根组件
 import app from './App.vue'

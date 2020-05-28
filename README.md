@@ -57,3 +57,36 @@
 1. 为加载更多按钮，绑定点击事件，在事件中，请求下一页数据
 2. 点击加载更多，让pageIndex++，然后重新调用 this.getComments() 方法重新获取最新一页的数据
 3. 为了防止新数据覆盖老数据的情况，我们在点击加载更多的时候，每当获取到新数据，应该让老数据调用数据的concat方法，拼接上新数组
+
+## 发表评论
+1. 将文本框做双向数据绑定
+2. 为发表按钮绑定一个事件
+3. 校验评论内容是否为空，如果为空，则Toast提示用户评论内容不能为空
+4. 通过vue-resource发送一个请求，将评论内容提交给服务器
+5. 当发表评论ok后，重新刷新列表，以查看最新的评论
+  + 如果调用 getComments 方法重新刷新评论列表的话，可能只能得到最后一页的评论，前几页的评论取不到
+  + 换一种思路：当评论成功后，在客户端，手动拼接出一个最新的评论对象，然后调用数组的unshift方法，把最新的评论，追加到data中comments的开头，这样，九阳完美实现刷新评论列表的需求了
+
+## 改造图片分享按钮为路由链接并显示对应的组件页面
+
+## 绘制图片列表组件页面结构并美化样式
+1. 顶部的滑动条制作
+2. 制作底部图片列表
+### 制作顶部滑动条的坑们
+1. 需要借助于 MUI 中的tab-top-weibo-view-main.html
+2. 需要将 slider 区域的 mui-fullscreen类去掉
+3. 滑动条无法正常触发滑动，通过检查官方文档，发现这是JS组件，需要被初始化一下
+  + 导入mui.js
+  + 调用官方提供的方式去初始化
+  ```
+  mui('.mui-scroll-wrapper').scroll({
+	deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+  });
+  ```
+4. 在初始化滑动条的时候，导入了mui.js,但是控制台报错了：` 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them`
++ 经过我们合理的推测，觉得，可能是 mui.js 中用到了 'caller', 'callee', and 'argument'东西，但是，webpack打包好的bundle.js中,默认是启用严格模式的，所以，这两者冲突了；
++ 解决方案：1. 将 mui.js 中的非严格模式的代码改掉，但是不现实； 2. 将 webpack 打包时候的严格模式禁用掉
++ 最终，我们选择了 plan B 移除严格模式：使用这个插件
+bable-plugin-transform-remove-strict-mode 
+5. 刚进入图片分享页面的时候，滑动条无法正常工作，经过认真的分析发现，如果要初始化滑动条，必须要等DOM元素加载完毕，所以，我们将初始化滑动条的代码搬到了mounted 生命周期函数中
+6. 当滑动条调试ok后，发现，tabbar无法正常工作了，这时候，我们需要把每个 tabbar 按钮的样式`mui-tab-item`重新改一下名字：`mui-tab-item-zx`
