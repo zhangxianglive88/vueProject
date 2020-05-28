@@ -10,6 +10,9 @@ Vue.use(vueRouter)
 import vueResource from "vue-resource"
 Vue.use(vueResource)
 
+// 设置请求的根路径
+Vue.http.options.root = 'http://zhangxiang.com:8888'
+
 // 导入APP根组件
 import app from './App.vue'
 
@@ -19,17 +22,22 @@ import './lib/mui/css/mui.css'
 // 导入mui的图标扩展样式
 import "./lib/mui/css/icons-extra.css"
 
-// 按需导入mint-ui中的组件
-import { Header } from "mint-ui"
-Vue.component(Header.name, Header)
-
 // 导入自己的 router.js模块
 import router from "./router.js"
 
-// 引入轮播组件，并注册
-import { Swipe, SwipeItem } from 'mint-ui';
-Vue.component(Swipe.name, Swipe);
-Vue.component(SwipeItem.name, SwipeItem);
+// 按需导入组件并注册
+import { Header, Swipe, SwipeItem, Button } from 'mint-ui';
+Vue.component(Swipe.name, Swipe)
+Vue.component(SwipeItem.name, SwipeItem)
+Vue.component(Header.name, Header)
+Vue.component(Button.name, Button)
+
+// 导入格式化时间的插件
+import moment from 'moment'
+// 定义全局的过滤器
+Vue.filter('dataFormat', function(dataStr, pattern = 'YYYY-MM-DD HH:mm:ss'){
+    return moment(dataStr).format(pattern)
+})
 
 var vm = new Vue({
     el:'#app',
