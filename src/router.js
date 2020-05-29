@@ -8,6 +8,7 @@ import SearchContainer from "./components/tabbar/SearchContainer.vue"
 import NewsList from './components/news/NewsList.vue'
 import Newsinfo from './components/news/Newsinfo.vue'
 import PhotoList from "./components/photos/PhotoList.vue"
+import PhotoInfo from "./components/photos/PhotoInfo.vue"
 
 
 var router = new VueRouter({
@@ -19,7 +20,8 @@ var router = new VueRouter({
         {path: '/search', component: SearchContainer},
         {path: '/home/newslist', component: NewsList},
         {path: '/home/photolist', component: PhotoList},
-        {path: '/home/newsinfo/:id', component: Newsinfo}
+        {path: '/home/newsinfo/:id', component: Newsinfo},
+        {path: '/home/photoinfo/:id', component: PhotoInfo}
     ],
     linkActiveClass: "mui-active" // 覆盖默认的路由高亮的类，默认的类叫作router-link-active
 })

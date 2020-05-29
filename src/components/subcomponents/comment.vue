@@ -7,7 +7,7 @@
     <mt-button type="primary" size="large" @click="postComment">发表评论</mt-button>
 
     <div class="cmt-list">
-        <div class="cmt-item" v-for="(comment, i) in comments" :key="comment.add_time">
+        <div class="cmt-item" v-for="(comment, i) in comments" :key="i">
             <div class="title">
                 第{{ i+1 }}楼&nbsp;&nbsp;用户：{{ comment.user_name }}&nbsp;&nbsp;发表时间：{{ comment.add_time | dataFormat }}
             </div>
@@ -64,7 +64,7 @@ export default{
                 if(result.body.status === 0){
                     // 拼接出一个评论对象
                     var cmt = {
-                        user_name:"匿名用户",
+                        user_name:"匿名",
                         add_time: new Date(),
                         content: this.msg
                     }

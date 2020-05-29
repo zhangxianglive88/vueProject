@@ -29,11 +29,22 @@ import "./lib/mui/css/icons-extra.css"
 import router from "./router.js"
 
 // 按需导入组件并注册
-import { Header, Swipe, SwipeItem, Button } from 'mint-ui';
-Vue.component(Swipe.name, Swipe)
-Vue.component(SwipeItem.name, SwipeItem)
-Vue.component(Header.name, Header)
-Vue.component(Button.name, Button)
+// import { Header, Swipe, SwipeItem, Button, Lazyload} from 'mint-ui';
+// Vue.component(Swipe.name, Swipe)
+// Vue.component(SwipeItem.name, SwipeItem)
+// Vue.component(Header.name, Header)
+// Vue.component(Button.name, Button)
+// Vue.use(Lazyload)
+
+// 完整引入
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+Vue.use(MintUI)
+
+// 引入vue集成PhotoSwipe图片预览插件
+import VuePreview from 'vue-preview'
+// defalut install
+Vue.use(VuePreview)
 
 // 导入格式化时间的插件
 import moment from 'moment'

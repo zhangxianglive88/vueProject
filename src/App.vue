@@ -40,6 +40,9 @@
   padding-top: 40px;
   padding-bottom: 50px;
   overflow-x: hidden;
+  .mint-header{
+    z-index: 99;
+  }
 }
 
 .v-enter-active,
