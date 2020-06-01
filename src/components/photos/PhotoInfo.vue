@@ -17,7 +17,7 @@
     <div class="content" v-html="photoinfo.content"></div>
 
     <!-- 放置一个现成的评论子组件 -->
-    <!-- <cmt-box :id="id"></cmt-box> -->
+    <cmt-box :id="id"></cmt-box>
   </div>
 </template>
 

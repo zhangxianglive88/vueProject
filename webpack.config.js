@@ -26,8 +26,10 @@ module.exports = {
   devServer: {
     open: true,
     // contentBase: 'src',
-    port: 3000,
-    hot: true
+    port: 8080,
+    hot: true,
+    disableHostCheck: true,
+    host: '192.168.31.88'
   },
   plugins: [ // 配置插件
     new webpack.HotModuleReplacementPlugin(), // new
