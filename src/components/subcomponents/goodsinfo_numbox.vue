@@ -23,9 +23,9 @@
 import mui from "../../lib/mui/js/mui.min.js";
 export default {
   mounted() {
-    // 树池化数字选择框组件
+    // 初试化数字选择框组件
     mui(".mui-numbox").numbox();
-    console.log(this.max);
+    // console.log(this.max);
   },
   methods: {
     countChanged() {
@@ -37,6 +37,7 @@ export default {
   props: ["max"],
   watch: {
     max: function(newValue, oldValue) {
+      // 使用 JS API 设置 numbox 的最大值
       mui(".mui-numbox")
         .numbox()
         .setOption("max", newValue);
