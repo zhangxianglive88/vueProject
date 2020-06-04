@@ -1,7 +1,11 @@
 <template>
   <div class="app-container">
     <!-- 顶部header区域 -->
-    <mt-header fixed title="Vue商城项目"></mt-header>
+    <mt-header fixed title="Vue商城项目">
+      <span slot="left" @click="goBack" v-if="flag">
+        <mt-button icon="back">返回</mt-button>
+      </span>
+    </mt-header>
 
     <!-- 中间的路由 router-view 区域 -->
     <transition>
@@ -33,6 +37,30 @@
 </template>
 
 <script>
+export default {
+  data() {
+    return {
+      flag: false
+    };
+  },
+  created() {
+    this.flag = this.$router === "/home" ? false : true;
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
+    }
+  },
+  watch: {
+    "$route.path": function(newVal) {
+      if (newVal === "/home") {
+        this.flag = false;
+      } else {
+        this.flag = true;
+      }
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -40,7 +68,7 @@
   padding-top: 40px;
   padding-bottom: 50px;
   overflow-x: hidden;
-  .mint-header{
+  .mint-header {
     z-index: 99;
   }
 }
@@ -50,7 +78,7 @@
   transition: all 0.5s ease;
 }
 
-.v-enter{
+.v-enter {
   transform: translateX(100%);
   opacity: 0;
 }
@@ -64,27 +92,30 @@
 // 改类名，解决 tabbar 无法切换的问题
 
 .mui-bar-tab .mui-tab-item-zx {
-    display: table-cell;
-    overflow: hidden;
-    width: 1%;
-    height: 50px;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #929292;
+  display: table-cell;
+  overflow: hidden;
+  width: 1%;
+  height: 50px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #929292;
 }
 .mui-bar-tab .mui-tab-item-zx .mui-icon {
-    top: 3px;
-    width: 24px;
-    height: 24px;
-    padding-top: 0;
-    padding-bottom: 0;
+  top: 3px;
+  width: 24px;
+  height: 24px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .mui-bar-tab .mui-tab-item-zx .mui-icon ~ .mui-tab-label {
-    font-size: 11px;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-size: 11px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+a.mui-active{
+  color: #007aff!important;
 }
 </style>
